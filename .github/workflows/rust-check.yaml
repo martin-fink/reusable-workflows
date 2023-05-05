@@ -39,6 +39,11 @@ jobs:
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
           restore-keys: ${{ runner.os }}-cargo-
 
+      - name: Install additional dependencies
+        if: ${{ inputs.additional-dependencies != ''}}
+        run: |
+          sudo apt-get -y install ${{ inputs.additional-dependencies }}
+
       - name: Lint
         run: |
           cargo fmt --all -- --check
