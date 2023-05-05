@@ -12,6 +12,10 @@ on:
         type: string
         required: false
         default: ''
+      container-registry:
+        type: string
+        required: false
+        default: ghcr.io
     secrets:
       container-registry-username:
         required: true
@@ -44,6 +48,7 @@ jobs:
       - name: Login to container registry
         uses: docker/login-action@v2.0.0
         with:
+          registry: ${{ inputs.container-registry }}
           username: ${{ secrets.container-registry-username }}
           password: ${{ secrets.container-registry-password }}
       - name: Build and push image with build args to container registry
