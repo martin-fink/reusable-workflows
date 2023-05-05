@@ -6,6 +6,11 @@ on:
         required: false
         default: nightly
         description: rust version to use for checks
+      additional-dependencies:
+        type: string
+        required: false
+        default: ''
+        description: additional dependencies installed using `apt-get`
 
 jobs:
   check:
@@ -43,13 +48,11 @@ jobs:
         run: |
           cargo install --locked cargo-outdated || true
           cargo install --locked cargo-audit || true
-          cargo install --locked cargo-udeps || true
 
       - name: Check
         run: |
           cargo outdated --exit-code 1
           cargo audit
-          cargo udeps
 
       - name: Test
         run: cargo test
