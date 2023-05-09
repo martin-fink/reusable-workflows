@@ -19,6 +19,8 @@ on:
 
 jobs:
   check:
+    env:
+      SQLX_OFFLINE: true
     defaults:
       run:
         working-directory: ${{ inputs.working-directory }}
