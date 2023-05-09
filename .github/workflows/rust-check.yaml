@@ -11,9 +11,17 @@ on:
         required: false
         default: ''
         description: additional dependencies installed using `apt-get`
+      working-directory:
+        type: string
+        required: false
+        default: '.'
+        description: working directory
 
 jobs:
   check:
+    defaults:
+      run:
+        working-directory: ${{ inputs.working-directory }}
     runs-on: ubuntu-latest
     steps:
       - name: Check out

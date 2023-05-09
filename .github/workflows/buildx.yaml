@@ -16,6 +16,11 @@ on:
         type: string
         required: false
         default: ghcr.io
+      working-directory:
+        type: string
+        required: false
+        default: '.'
+        description: working directory
     secrets:
       container-registry-username:
         required: true
@@ -23,6 +28,9 @@ on:
         required: true
 jobs:
   build:
+    defaults:
+      run:
+        working-directory: ${{ inputs.working-directory }}
     runs-on: ubuntu-latest
     steps:
       - name: Check out
